@@ -13,3 +13,8 @@ Nessa aplicação precisamos de um back-end integrado para que forneça as funci
 #### Cookie : É uma forma de armazenamento mais antiga que conseguimos persistir os dados tanto no client quanto no server 
 
 #### Obs: Nessa implementação estamos usando o nookies(Lib para armazenamento de informações no cookie)
+
+#### Criação de Filas de Requisições no axios
+
+Nessa aplicação como estamos trabalhando com autenticações precisamos criar um interceptor de requisições no axios para fazer a validação e a atualização dos tokens nas filas de requisições.
+
