@@ -18,3 +18,29 @@ Nessa aplicação precisamos de um back-end integrado para que forneça as funci
 
 Nessa aplicação como estamos trabalhando com autenticações precisamos criar um interceptor de requisições no axios para fazer a validação e a atualização dos tokens nas filas de requisições.
 
+### Cookies
+Nessa implementação estamos usando no nookies para trabalhar com cookies.
+
+obs: Quando usamos o nookies nas funções de getServerSidePros... etc. Precisamos passar o contexto para as funções do nookies.
+
+
+```jsx
+export const getServerSideProps: GetServerSideProps = async ( ctx) => {
+
+    //function para parsear os cookies
+    const cookies = parseCookies(ctx);
+
+    return {
+        props: {}   
+    }
+}
+```
+
+
+### Verificação se o código está sendo executado pelo client ou pelo server
+
+```jsx
+if (process.browser) {
+    signOut();
+}
+```
