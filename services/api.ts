@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import Router from "next/router";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
+import { AuthTokenError } from "./errors/AuthTokenError";
 
 let isRefreshing = false;
 let failedRequestsQueue: any[] = [];
@@ -90,9 +91,12 @@ export function setupApiClient(ctx = undefined) {
                 });
     
             } else {
-                // deslogar o usuario
+                // deslogar o usuario somente no lado do client porque no lado do server o signout deve ser aplicado diferente
                 if (process.browser) {
                     signOut();
+                } else {
+                    //pelo server vamos disparar um error que conseguimos capturar por uma verificação usando instaceof do js 
+                    return Promise.reject(new AuthTokenError())
                 }
     
             }
