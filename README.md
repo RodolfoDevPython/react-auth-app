@@ -44,3 +44,33 @@ if (process.browser) {
     signOut();
 }
 ```
+
+
+#### Funcionalidade de signOut vamos utilizar a interface BroadcastChannel
+
+```jsx
+const authChannel = new BroadcastChannel('auths');
+
+export function signOut() {
+    //Dispara uma mensagem para o BroadcastChannel fazendo que todas as janelas do navegador possam ouvir esse disparo
+    authChannel.postMessage("signOut");
+}
+```
+
+Para escutar o evento usamos a seguinte forma:
+```jsx
+
+authChannel = new BroadcastChannel('auth');
+
+//Conseguimos ouvir os eventos pelo onmessage
+authChannel.onmessage = message => {
+    switch (message.data) {
+        case 'signOut':
+            signOut();
+            break;
+        default:
+            break;
+    }
+}
+
+```
