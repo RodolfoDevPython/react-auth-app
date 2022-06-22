@@ -1,0 +1,31 @@
+import { setupApiClient } from "../services/api";
+import { withSSRAuth } from "../utils/withSSRAuth";
+
+export default function Metrics() {
+
+    return (
+        <>
+            <h1>
+                Metricas
+            </h1>
+        </>
+    )
+}
+
+
+//Forma de validação de permissões criadas para atuar no server-side
+export const getServerSideProps = withSSRAuth( async (ctx) => {
+
+    const apiClient = setupApiClient(ctx);
+    const response = await apiClient.get("/me");
+
+    return {
+        props: {
+
+        }
+    }
+
+}, {
+    permissions: ['metrics.list'],
+    roles: ['administrator']
+})
